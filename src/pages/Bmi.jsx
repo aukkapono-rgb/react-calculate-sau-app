@@ -23,7 +23,7 @@ export default function Bmi() {
                  className="border border-gray-300 p-2 rounded-md
                             placeholder:font-kanit" />
  
-          <label className="font-kanit mt-3">ป้อนน้ำสูง (เซนติเมตร)</label>
+          <label className="font-kanit mt-3">ป้อนส่วนสูง (เซนติเมตร)</label>
           <input type="number" name="" id="" placeholder="เช่น 170"
                  className="border border-gray-300 p-2 rounded-md
                             placeholder:font-kanit" />

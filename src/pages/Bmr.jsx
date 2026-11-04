@@ -1,6 +1,6 @@
 import { useState } from "react";
-import bmrImg from "../assets/bmr.png"; // เปลี่ยนเป็น path รูปภาพของคุณ
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
+import bmrImg from "../assets/bmr.png";
 
 export default function Bmr() {
   const [weight, setWeight] = useState("");
@@ -20,10 +20,10 @@ export default function Bmr() {
 
       if (gender === "male") {
         // สูตรผู้ชาย: BMR = 66 + (13.7 x weight) + (5 x height) - (6.8 x age)
-        bmrValue = 66 + 13.7 * w + 5 * h - 6.8 * a;
+        bmrValue = 66 + (13.7 * w) + (5 * h) - (6.8 * a);
       } else {
         // สูตรผู้หญิง: BMR = 665 + (9.6 x weight) + (1.8 x height) - (4.7 x age)
-        bmrValue = 665 + 9.6 * w + 1.8 * h - 4.7 * a;
+        bmrValue = 665 + (9.6 * w) + (1.8 * h) - (4.7 * a);
       }
 
       setBmr(bmrValue.toFixed(2));
@@ -40,7 +40,8 @@ export default function Bmr() {
 
   return (
     <>
-      <div className="w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 m-auto flex flex-col items-center p-10 bg-white">
+      {/* ปรับสัดส่วนความกว้างการ์ดให้รองรับทุกหน้าจอ Responsive */}
+      <div className="w-[90%] md:w-[60%] lg:w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
         <p className="font-kanit font-bold text-2xl text-gray-800">BMR Calculator</p>
         <p className="font-kanit font-bold text-gray-400 text-sm mt-1">คำนวณ BMR</p>
 
@@ -55,7 +56,7 @@ export default function Bmr() {
             type="number"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
-            className="border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
+            className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
             required
           />
 
@@ -65,7 +66,7 @@ export default function Bmr() {
             type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            className="border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
+            className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
             required
           />
 
@@ -75,13 +76,13 @@ export default function Bmr() {
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            className="border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
+            className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
             required
           />
 
           {/* ตัวเลือกเพศ */}
           <label className="font-kanit text-xs text-gray-500 mt-3 mb-1">เพศ</label>
-          <div className="flex gap-4 items-center font-kanit text-xs text-gray-700">
+          <div className="w-full flex gap-6 items-center font-kanit text-xs text-gray-700 bg-gray-50 p-2.5 rounded-md border border-gray-200">
             <label className="flex items-center gap-1 cursor-pointer">
               <input
                 type="radio"
@@ -108,14 +109,14 @@ export default function Bmr() {
           <div className="flex gap-3 mt-6">
             <button
               type="submit"
-              className="w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white font-kanit text-sm font-semibold py-2 rounded-md transition duration-200"
+              className="w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white font-kanit text-sm font-semibold py-2 rounded-md transition duration-200 cursor-pointer"
             >
               คำนวณ BMR
             </button>
             <button
               type="button"
               onClick={handleReset}
-              className="w-1/2 bg-red-500 hover:bg-red-600 text-white font-kanit text-sm font-semibold py-2 rounded-md transition duration-200"
+              className="w-1/2 bg-red-500 hover:bg-red-600 text-white font-kanit text-sm font-semibold py-2 rounded-md transition duration-200 cursor-pointer"
             >
               รีเซ็ต
             </button>

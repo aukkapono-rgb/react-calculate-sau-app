@@ -1,6 +1,6 @@
 import { useState } from "react";
 import carImg from "../assets/car.png"; // เปลี่ยนเป็น path รูปภาพรถของคุณ
-import { Link } from "react-router-dom";
+import { Link } from "react-router"; // แนะนำให้ใช้ react-router-dom
 
 export default function Car() {
   const [name, setName] = useState("");
@@ -52,7 +52,7 @@ export default function Car() {
 
   return (
     <>
-      <div className="w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 m-auto flex flex-col items-center p-10 bg-white">
+      <div className="w-[90%] md:w-[45%] border border-gray-200 rounded-2xl shadow-xl mt-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
         <p className="font-kanit font-bold text-2xl text-gray-800">Car Installment Calculator</p>
         <p className="font-kanit font-bold text-gray-400 text-sm mt-1">คำนวณ Car Installment</p>
 
@@ -67,7 +67,7 @@ export default function Car() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500"
+            className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500"
           />
 
           {/* ราคารถ (บาท) */}
@@ -76,7 +76,7 @@ export default function Car() {
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500"
+            className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500"
             required
           />
 
@@ -87,13 +87,13 @@ export default function Car() {
             step="0.01"
             value={interestRate}
             onChange={(e) => setInterestRate(e.target.value)}
-            className="border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500"
+            className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500"
             required
           />
 
-          {/* เงินดาวน์ (%) */}
+          {/* เงินดาวน์ (%) - จัดระเบียบด้วย w-full และ flex-wrap เพื่อไม่ให้ล้นกรอบ */}
           <label className="font-kanit text-xs text-gray-500 mt-3 mb-1">เงินดาวน์ (%)</label>
-          <div className="flex gap-4 items-center font-kanit text-xs text-gray-700">
+          <div className="w-full flex flex-wrap justify-between gap-2 font-kanit text-xs text-gray-700 bg-gray-50 p-2.5 rounded-md border border-gray-200">
             {["15", "20", "25", "30", "35"].map((percent) => (
               <label key={percent} className="flex items-center gap-1 cursor-pointer">
                 <input
@@ -113,7 +113,7 @@ export default function Car() {
           <select
             value={months}
             onChange={(e) => setMonths(e.target.value)}
-            className="border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500 font-kanit"
+            className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500 font-kanit bg-white"
           >
             <option value="24">24 เดือน</option>
             <option value="36">36 เดือน</option>
@@ -127,14 +127,14 @@ export default function Car() {
           <div className="flex gap-3 mt-6">
             <button
               type="submit"
-              className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white font-kanit text-sm font-semibold py-2 rounded-md transition duration-200"
+              className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white font-kanit text-sm font-semibold py-2 rounded-md transition duration-200 cursor-pointer"
             >
               คำนวณ
             </button>
             <button
               type="button"
               onClick={handleReset}
-              className="w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-700 font-kanit text-sm font-semibold py-2 rounded-md transition duration-200"
+              className="w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-700 font-kanit text-sm font-semibold py-2 rounded-md transition duration-200 cursor-pointer"
             >
               ล้างข้อมูล
             </button>
