@@ -10,7 +10,7 @@ export default function Bmr() {
   const [height, setHeight] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("male");
-  const [bmr, setBmr] = useState(0);
+  const [bmr, setBmr] = useState("0.00");
 
   // ฟังก์ชันสำหรับคำนวณค่า BMR
   const calculateBmr = (e) => {
@@ -24,14 +24,13 @@ export default function Bmr() {
       Swal.fire({
         icon: "warning",
         title: "คำเตือน",
-        text: "กรุณาป้อนข้อมูลน้ำหนัก ส่วนสูง และอายุให้ครบถ้วนนะ...ซิบอกให้",
+        text: "กรุณาป้อนข้อมูลน้ำหนัก ส่วนสูง และอายุให้ครบเด้อ..ซิบอกให้",
         confirmButtonText: "ตกลง",
       });
-      return; 
+      return;
     }
 
     let bmrValue = 0;
-
     if (gender === "male") {
       // สูตรผู้ชาย: BMR = 66 + (13.7 x weight) + (5 x height) - (6.8 x age)
       bmrValue = 66 + (13.7 * w) + (5 * h) - (6.8 * a);
@@ -49,12 +48,12 @@ export default function Bmr() {
     setHeight("");
     setAge("");
     setGender("male");
-    setBmr(0);
+    setBmr("0.00");
   };
 
   return (
     <>
-      <div className="w-[90%] md:w-[45%] lg:w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
+      <div className="w-[90%] md:w-[45%] lg:w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 mb-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
         <p className="font-kanit font-bold text-2xl text-gray-800">BMR Calculator</p>
         <p className="font-kanit font-bold text-gray-400 text-sm mt-1">คำนวณ BMR</p>
 
@@ -67,20 +66,20 @@ export default function Bmr() {
           <label className="font-kanit text-xs text-gray-500 mb-1">ป้อนน้ำหนัก (กิโลกรัม)</label>
           <input
             type="number"
+            step="any"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
             className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
-            required
           />
 
           {/* ป้อนส่วนสูง */}
           <label className="font-kanit text-xs text-gray-500 mt-3 mb-1">ป้อนส่วนสูง (เซนติเมตร)</label>
           <input
             type="number"
+            step="any"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
             className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
-            required
           />
 
           {/* ป้อนอายุ */}
@@ -90,7 +89,6 @@ export default function Bmr() {
             value={age}
             onChange={(e) => setAge(e.target.value)}
             className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-indigo-500"
-            required
           />
 
           {/* ตัวเลือกเพศ */}
@@ -141,6 +139,7 @@ export default function Bmr() {
           <span className="font-bold text-gray-700 text-sm">ค่า BMR ที่คำนวณได้ :</span>
           <span className="font-bold text-indigo-600 text-sm">{bmr} kcal/day</span>
         </div>
+
         {/* ลิงก์กลับหน้าหลัก */}
         <Link
           to="/"
@@ -148,10 +147,10 @@ export default function Bmr() {
         >
           กลับหน้าหลัก
         </Link>
+
         {/* แสดงส่วน Footer */}
         <Footer />
       </div>
-
     </>
-  )
+  );
 }
