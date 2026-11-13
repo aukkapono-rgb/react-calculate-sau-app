@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router"; // หากใช้ React Router v6 ให้ใช้ "react-router-dom" แต่ถ้าเป็น v7 ใช้ "react-router" ได้เลยครับ
 import bmi from "./../assets/bmi.png";
+import Footer from "../components/Footer";
 
 export default function Bmi() {
   // 1. สร้าง State สำหรับเก็บค่าจากฟอร์มและผลลัพธ์
