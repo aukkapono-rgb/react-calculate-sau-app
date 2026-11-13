@@ -126,7 +126,7 @@ export default function Bmr() {
         {/* ผลลัพธ์ */}
         <div className="flex justify-center items-center gap-2 mt-5 font-kanit">
           <span className="font-bold text-gray-700 text-sm">ค่า BMR ที่คำนวณได้ :</span>
-          <span className="font-bold text-indigo-600 text-sm">{bmr} kcal/day</span>
+          <span className="font-bold text-indigo-600 text-sm">{bmr} kcal</span>
         </div>
 
         {/* ลิงก์กลับหน้าหลัก */}
