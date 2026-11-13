@@ -120,6 +120,11 @@ export default function Bmi() {
           กลับหน้าหลัก
         </Link>
       </div>
+      {/* แสดงส่วน Footer */}
+        <div className="mt-12 mb-6">
+          <Footer />
+        </div>
+      </div>
     </>
   );
 }
