@@ -1,35 +1,49 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import bmrImg from "../assets/bmr.png";
+import Swal from "sweetalert2";
+import Footer from "../components/Footer";
 
 export default function Bmr() {
+  // สร้าง state สำหรับเก็บค่าที่ป้อนเข้ามา
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("male");
   const [bmr, setBmr] = useState(0);
 
+  // ฟังก์ชันสำหรับคำนวณค่า BMR
   const calculateBmr = (e) => {
     e.preventDefault();
     const w = parseFloat(weight);
     const h = parseFloat(height);
     const a = parseFloat(age);
 
-    if (w > 0 && h > 0 && a > 0) {
-      let bmrValue = 0;
-
-      if (gender === "male") {
-        // สูตรผู้ชาย: BMR = 66 + (13.7 x weight) + (5 x height) - (6.8 x age)
-        bmrValue = 66 + (13.7 * w) + (5 * h) - (6.8 * a);
-      } else {
-        // สูตรผู้หญิง: BMR = 665 + (9.6 x weight) + (1.8 x height) - (4.7 x age)
-        bmrValue = 665 + (9.6 * w) + (1.8 * h) - (4.7 * a);
-      }
-
-      setBmr(bmrValue.toFixed(2));
+    // เช็กว่าถ้าข้อมูลไม่ครบหรือค่าไม่ถูกต้อง ให้แจ้งเตือน
+    if (!w || !h || !a || w <= 0 || h <= 0 || a <= 0) {
+      Swal.fire({
+        icon: "warning",
+        title: "คำเตือน",
+        text: "กรุณาป้อนข้อมูลน้ำหนัก ส่วนสูง และอายุให้ครบถ้วนนะ...ซิบอกให้",
+        confirmButtonText: "ตกลง",
+      });
+      return; 
     }
+
+    let bmrValue = 0;
+
+    if (gender === "male") {
+      // สูตรผู้ชาย: BMR = 66 + (13.7 x weight) + (5 x height) - (6.8 x age)
+      bmrValue = 66 + (13.7 * w) + (5 * h) - (6.8 * a);
+    } else {
+      // สูตรผู้หญิง: BMR = 665 + (9.6 x weight) + (1.8 x height) - (4.7 x age)
+      bmrValue = 665 + (9.6 * w) + (1.8 * h) - (4.7 * a);
+    }
+
+    setBmr(bmrValue.toFixed(2));
   };
 
+  // ฟังก์ชันสำหรับรีเซ็ตฟอร์ม
   const handleReset = () => {
     setWeight("");
     setHeight("");
@@ -40,7 +54,6 @@ export default function Bmr() {
 
   return (
     <>
-      {/* ปรับสัดส่วนความกว้างการ์ดให้รองรับทุกหน้าจอ Responsive */}
       <div className="w-[90%] md:w-[60%] lg:w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
         <p className="font-kanit font-bold text-2xl text-gray-800">BMR Calculator</p>
         <p className="font-kanit font-bold text-gray-400 text-sm mt-1">คำนวณ BMR</p>
@@ -126,9 +139,8 @@ export default function Bmr() {
         {/* ผลลัพธ์ */}
         <div className="flex justify-center items-center gap-2 mt-5 font-kanit">
           <span className="font-bold text-gray-700 text-sm">ค่า BMR ที่คำนวณได้ :</span>
-          <span className="font-bold text-indigo-600 text-sm">{bmr} kcal</span>
+          <span className="font-bold text-indigo-600 text-sm">{bmr} kcal/day</span>
         </div>
-
         {/* ลิงก์กลับหน้าหลัก */}
         <Link
           to="/"
@@ -136,7 +148,10 @@ export default function Bmr() {
         >
           กลับหน้าหลัก
         </Link>
+        {/* แสดงส่วน Footer */}
+        <Footer />
       </div>
+
     </>
-  );
+  )
 }
