@@ -54,7 +54,7 @@ export default function Bmr() {
 
   return (
     <>
-      <div className="w-[90%] md:w-[60%] lg:w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
+      <div className="w-[90%] md:w-[45%] lg:w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
         <p className="font-kanit font-bold text-2xl text-gray-800">BMR Calculator</p>
         <p className="font-kanit font-bold text-gray-400 text-sm mt-1">คำนวณ BMR</p>
 
