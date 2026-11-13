@@ -41,7 +41,7 @@ export default function Bmi() {
   return (
     <>
       <div
-        className="w-[90%] md:w-[50%] border border-gray-200 rounded-2xl
+        className="w-[90%] md:w-[45%] border border-gray-200 rounded-2xl
                    shadow-xl mt-10 md:mt-20 mb-10 mx-auto flex flex-col
                    items-center p-6 md:p-10"
       >
