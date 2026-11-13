@@ -1,7 +1,8 @@
 import { useState } from "react";
-import carImg from "../assets/car.png"; // เปลี่ยนเป็น path รูปภาพรถของคุณ
-import { Link } from "react-router"; // แนะนำให้ใช้ react-router-dom
-import Footer from "../components/Footer"; // นำเข้า Footer component
+import carImg from "../assets/car.png";
+import { Link } from "react-router";
+import Footer from "../components/Footer";
+import Swal from "sweetalert2";
 
 export default function Car() {
   const [name, setName] = useState("");
@@ -18,7 +19,15 @@ export default function Car() {
     const downPercent = parseFloat(downPaymentPercent);
     const totalMonths = parseInt(months);
 
-    if (carPrice > 0 && interest >= 0 && totalMonths > 0) {
+    // ตรวจสอบว่าป้อนข้อมูลครบถ้วนและถูกต้องหรือไม่ (ชื่อไม่ว่าง, ราคารถ > 0, ดอกเบี้ย >= 0)
+    if (
+      name.trim() !== "" &&
+      price !== "" &&
+      interestRate !== "" &&
+      carPrice > 0 &&
+      interest >= 0 &&
+      totalMonths > 0
+    ) {
       // 1. คำนวณเงินดาวน์ และยอดจัดไฟแนนซ์
       const downPaymentAmount = carPrice * (downPercent / 100);
       const financeAmount = carPrice - downPaymentAmount;
@@ -39,6 +48,15 @@ export default function Car() {
           maximumFractionDigits: 2,
         })
       );
+    } else {
+      // แจ้งเตือนด้วย SweetAlert2 เมื่อกรอกข้อมูลไม่ครบหรือค่าไม่ถูกต้อง
+      Swal.fire({
+        icon: "warning",
+        title: "คำเตือน",
+        text: "กรุณาป้อนชื่อผู้คำนวณ ราคารถ และดอกเบี้ยต่อปีให้ครบเด้อ..ซิบอกให้",
+        confirmButtonText: "ตกลง",
+      });
+      return;
     }
   };
 
@@ -53,7 +71,7 @@ export default function Car() {
 
   return (
     <>
-      <div className="w-[90%] md:w-[45%] border border-gray-200 rounded-2xl shadow-xl mt-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
+      <div className="w-[90%] md:w-[45%] lg:w-[40%] border border-gray-200 rounded-2xl shadow-xl mt-10 mb-10 mx-auto flex flex-col items-center p-6 md:p-10 bg-white">
         <p className="font-kanit font-bold text-2xl text-gray-800">Car Installment Calculator</p>
         <p className="font-kanit font-bold text-gray-400 text-sm mt-1">คำนวณ Car Installment</p>
 
@@ -75,10 +93,10 @@ export default function Car() {
           <label className="font-kanit text-xs text-gray-500 mt-3 mb-1">ราคารถ (บาท)</label>
           <input
             type="number"
+            step="any"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500"
-            required
           />
 
           {/* ดอกเบี้ยต่อปี (%) */}
@@ -89,10 +107,9 @@ export default function Car() {
             value={interestRate}
             onChange={(e) => setInterestRate(e.target.value)}
             className="w-full border border-gray-200 rounded-md p-2 text-sm focus:outline-none focus:border-blue-500"
-            required
           />
 
-          {/* เงินดาวน์ (%) - จัดระเบียบด้วย w-full และ flex-wrap เพื่อไม่ให้ล้นกรอบ */}
+          {/* เงินดาวน์ (%) */}
           <label className="font-kanit text-xs text-gray-500 mt-3 mb-1">เงินดาวน์ (%)</label>
           <div className="w-full flex flex-wrap justify-between gap-2 font-kanit text-xs text-gray-700 bg-gray-50 p-2.5 rounded-md border border-gray-200">
             {["15", "20", "25", "30", "35"].map((percent) => (
@@ -155,6 +172,7 @@ export default function Car() {
         >
           กลับหน้าหลัก
         </Link>
+
         {/* แสดงส่วน Footer */}
         <Footer />
       </div>
