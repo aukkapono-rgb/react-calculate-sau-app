@@ -1,6 +1,7 @@
 import { useState } from "react";
 import carImg from "../assets/car.png"; // เปลี่ยนเป็น path รูปภาพรถของคุณ
 import { Link } from "react-router"; // แนะนำให้ใช้ react-router-dom
+import Footer from "../components/Footer"; // นำเข้า Footer component
 
 export default function Car() {
   const [name, setName] = useState("");
@@ -154,6 +155,8 @@ export default function Car() {
         >
           กลับหน้าหลัก
         </Link>
+        {/* แสดงส่วน Footer */}
+        <Footer />
       </div>
     </>
   );
